@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Seznam rezervací
+{% endblock %}
+
+{% block content %}
+    <h2 class="text-primary text-center text-uppercase m-3">Seznam rezervací</h2>
+    <div>
+        <table class="table table-bordered table-responsive-lg">
+            <thead class="bg-dark text-light">
+                <tr>
+                    <th>Klient</th>
+                    <th>Ubytování</th>
+                    <th>Začátek</th>
+                    <th>Konec</th>
+                    <th>Počet osob</th>
+                    <th>Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rezervace in rezervace_list %}
+                <tr>
+                    <td>{{ rezervace.klient.jmeno|first }}. {{ rezervace.klient.prijmeni }}</td>
+                    <td><b>{{ rezervace.ubytovani.oznaceni.upper }}</b></td>
+                    <td class="text-right">{{ rezervace.zacatek_pobytu }}</td>
+                    <td class="text-right">{{ rezervace.konec_pobytu }}</td>
+                    <td class="text-right">{{ rezervace.pocet_osob }}</td>
+                    <td class="bg-light"><a href="{% url 'detail_rezervace' rezervace.id %}" class="btn btn-success">Detail</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+{% endblock %}

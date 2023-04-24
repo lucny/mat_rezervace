@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Detail rezervace
+{% endblock %}
+
+{% block content %}
+    <h2 class="bg-danger text-light text-center text-uppercase p-3">Detail rezervace</h2>
+    <div class="row mt-3">
+        <div class="col-lg-4">
+            <h3>Klient</h3>
+            <div class="bg-light p-3">
+               <p>Jméno: {{ rezervace.klient.jmeno }}</p>
+               <p>Příjmení: {{ rezervace.klient.prijmeni }}</p>
+               <p>E-mail: {{ rezervace.klient.email }}</p>
+               <p>Telefon: {{ rezervace.klient.telefon }}</p>
+            </div>
+            <h5 class="mt-3 bg-danger text-light text-center p-2">Pobyt</h5>
+            <div class="bg-light p-3">
+                <p>Datum příjezdu: <b>{{ rezervace.zacatek_pobytu }}</b></p>
+                <p>Datum odjezdu: <b>{{ rezervace.konec_pobytu }}</b></p>
+                <p>Počet osob: <span class="badge-pill badge-danger">{{ rezervace.pocet_osob }}</span></p>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <h3>Ubytování</h3>
+            <div class="row">
+                <div class="col-lg-6 p-3">
+                    <h4>{{ rezervace.ubytovani.oznaceni }}</h4>
+                    <p>{{ rezervace.ubytovani.adresa }}, {{ rezervace.ubytovani.misto }} {{ rezervace.ubytovani.psc }}</p>
+                    <h5 class="border-top pt-3 text-danger">Kontakt</h5>
+                    <p><b>{{ rezervace.ubytovani.kontakt }}</b></p>
+                    <p>Telefon: {{ rezervace.ubytovani.telefon }}</p>
+                    <p>E-mail: {{ rezervace.ubytovani.email }}</p>
+                </div>
+                <div class="col-lg-6 p-3">
+                    <img src="{{ rezervace.ubytovani.foto_set.first.fotka.url }}" alt="{{ rezervace.ubytovani.foto.popis }}"
+                    class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

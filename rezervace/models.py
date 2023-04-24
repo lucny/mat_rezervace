@@ -108,3 +108,32 @@ class Foto(models.Model):
         return f'{self.ubytovani}: ({self.popis})'
 
 
+class Hodnoceni(models.Model):
+    klient = models.ForeignKey('Klient', on_delete=models.CASCADE, verbose_name='Hodnocení klienta',
+                               error_messages={'blank': 'Jméno klienta musí být zvoleno'})
+    ubytovani = models.ForeignKey('Ubytovani', on_delete=models.CASCADE, verbose_name='Název ubytování',
+                                  error_messages={'blank': 'Ubytování musí být vybráno'})
+    pozitiva = models.TextField(max_length=1000, blank=True, null=True, verbose_name='Pozitiva',
+                               help_text='Vypište kladné stránky ubytování o maximální délce 1000 znaků',
+                               error_messages={'max_length': 'Text nesmí být delší než 1000 znaků'})
+    negativa = models.TextField(max_length=1000, blank=True, null=True, verbose_name='Negativa',
+                               help_text='Vypište záporné stránky ubytování (max. 1000 znaků)',
+                               error_messages={'max_length': 'Text nesmí být delší než 1000 znaků'})
+    znamky = [
+        (1, 'výborné'),
+        (2, 'chvalitebné'),
+        (3, 'dobré'),
+        (4, 'dostatečné'),
+        (5, 'nedostatečné'),
+    ]
+    znamka = models.PositiveSmallIntegerField(choices=znamky, verbose_name='Známka', help_text='Zadej hodnocení jako ve škole',
+                                              error_messages={'blank': 'Hodnocení známkou musí být vyplněno'})
+    datum_recenze = models.DateField(auto_now=False, auto_now_add=True, verbose_name='Datum recenze')
+
+    class Meta:
+        ordering = ['ubytovani', '-datum_recenze']
+        verbose_name = 'Hodnocení pobytu'
+        verbose_name_plural = 'Hodnocení pobytu'
+
+    def __str__(self):
+        return f'{self.ubytovani}: {self.znamka}, ({self.klient}, {self.datum_recenze})'

@@ -1,5 +1,5 @@
 # Django - Rezervace ubytování
-## Školní příklad
+## Školní příklad - řešení
 ### Instalace
 1. Klonování repozitáře
 - `git clone https://github.com/lucny/mat_rezervace.git`

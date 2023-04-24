@@ -8,13 +8,13 @@
     </div>
     {% for misto in mista %}
     <div class="row">
-        <div class="col-lg-3 col-md-4">
+        <div class="col-lg-3">
             <figure>
                 <img src="{{ misto.foto_set.first.fotka.url }}" alt="{{ misto.oznaceni }}" class="img-fluid">
                 <figcaption>{{ misto.foto_set.first.popis }}</figcaption>
             </figure>
         </div>
-        <div class="col-lg-6 col-md-4">
+        <div class="col-lg-9">
             <h3>{{ misto.oznaceni }}</h3>
             <p>{{ misto.popis|truncatewords:25 }}</p>
             <p>Počet pokojů: <span class="badge badge-danger">{{ misto.pocet_pokoju }}</span> | Vybavení:
@@ -25,14 +25,17 @@
                 </span>
             </p>
         </div>
-        <div class="col-lg-3 col-md-4 kontakt">
+<!--
+        <div class="col-lg-3 kontakt">
             <h4>Kontakt</h4>
             <p>Adresa: <b>{{ misto.adresa }}, {{ misto.misto }}, {{ misto.psc }}</b></p>
             <p>Telefon: <b>{{ misto.telefon }}</b></p>
             <p>E-mail: <b><a href="mailto:{{ misto.email }}">{{ misto.email }}</a></b></p>
             <p><a href="#" class="btn btn-secondary mt-2">Podrobnější informace</a></p>
         </div>
+-->
     </div>
+
     <hr>
     {% endfor %}
 {% endblock %}
